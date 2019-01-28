@@ -10,7 +10,7 @@ class GridPoint:
     
     def set_let(self, let):
         self.let = let
-
+#Just testing to see if git is set up correctly...
 
 class Search:
     def __init__(self):

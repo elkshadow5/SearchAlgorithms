@@ -110,13 +110,13 @@ class Search:
         return True
     
     def getSpot(self):
-        return self.arena[self.currSpot[0]][self.currSpot[1]]
+        return self.arena[self.currSpot.row][self.currSpot.col]
     
     def printState(self):
         for row in ([0, 1, 2, 3, 4, 5]):
             for col in ([0, 1, 2, 3, 4, 5, 6]):
-                print(self.arena[row][col].let, end = '  ')
-            print() # new line
+                print(self.arena[row][col].let, end = ' ')
+            print()  # new line
 
 
 search = Search()

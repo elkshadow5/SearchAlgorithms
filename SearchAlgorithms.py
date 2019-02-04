@@ -28,7 +28,7 @@ class GridPoint:
 class Search:
     def __init__(self):
         #basic list of colors to try. Will only work if enough colors for problem
-        self.colors = ["red", "green","blue","cyan","yellow","magenta","black"]
+        self.colors = ["red", "green","blue","cyan","yellow","magenta"]
         self.map = [("r1", "r2"), ("r1", "r3"), ("r2", "r4"), ("r3", "r4")]
         self.grid = []
         added = []
@@ -65,7 +65,7 @@ class Search:
         stack.append(grid[0])
 
         #Start going through the stack        
-        while len(stack)>0:
+        while not self.reachedEndCondition(grid):
             point = stack.pop()
             closed.append(point)
             print("\tNow working with node "+point.let+"...")
@@ -91,6 +91,11 @@ class Search:
         grid = copy.deepcopy(self.grid)
         return 0
 
+    def reachedEndCondition(self, gridIn):
+        for point in gridIn:
+            if point.hasConflict() or point.color=="black":
+                return False
+        return True
     
     def printState(self):
         print("\nMap in:")

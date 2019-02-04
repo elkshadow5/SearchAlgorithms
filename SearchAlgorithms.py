@@ -25,16 +25,18 @@ class GridPoint:
 
 class Search:
     def __init__(self):
-        #basic list of colors to try. Will only work if enough colors fro problem
+        #basic list of colors to try. Will only work if enough colors for problem
         self.colors = ["red", "green","blue","cyan","yellow","magenta","black"]
         self.map = [("r1", "r2"), ("r1", "r3"), ("r2", "r4"), ("r3", "r4")]
         self.grid = []
         added = []
+        #Create GridPoint Objects
         for adj in self.map:
             for grdpt in adj:
                 if grdpt not in added:
                     added.append(grdpt)
                     self.grid.append(GridPoint(grdpt,"black"))
+        #Give GridPoints their neighbors
         for grdpt in self.grid:
             for adj in self.map:
                 if grdpt.let == adj[0]:
@@ -66,7 +68,6 @@ class Search:
             colorToTry = 0
             point.color = self.colors[colorToTry]
             while point.hasConflict():
-                print(point.color)
                 colorToTry=colorToTry+1
                 point.color = self.colors[colorToTry]
 
@@ -80,9 +81,11 @@ class Search:
 
     
     def printState(self):
+        print()
+        print("Map in:")
         for pt in self.grid:
             print(pt)
-            print()  # new line
+        print()
 
 
 search = Search()

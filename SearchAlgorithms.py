@@ -58,18 +58,9 @@ class Search:
                         if neighbor.let == adj[0]:
                             grdpt.addNeighbors(neighbor)
     
-    def dequeue(self, arr):
-        if len(arr) > 0:
-            return True, arr.pop(0)
-        return False
-    
-    def enqueue(self, arr, point):
-        arr.insert(len(arr), point)
-        return True
-    
     # SEARCH ALGORITHMS #
     def breadth(self):
-        # USE THIS GRID! Keeps from messing up the later searches
+        print("\nBreadth First Searching: ")
         grid = copy.deepcopy(self.grid)
         queue = []
         closed = []
@@ -80,7 +71,8 @@ class Search:
             curr_node = queue[0]
             print("\tSearching node " + curr_node.let + "...")
             for neighbor in curr_node.neighbors:
-                self.enqueue(queue, neighbor)
+                if neighbor not in closed and neighbor not in queue:
+                    self.enqueue(queue, neighbor)
             
             # Go through the list of colors until get one so its different
             #  than any of its neighbors' colors
@@ -89,9 +81,7 @@ class Search:
             while curr_node.hasConflict():
                 colorToTry += 1
                 curr_node.color = self.colors[colorToTry]
-            pop = self.dequeue(queue)
-            if pop:
-                closed.append(pop[1])
+            closed.append(self.dequeue(queue)[1])
         
         # print the results
         print("Breadth first search result:")
@@ -179,6 +169,15 @@ class Search:
         print("Iterative Depth first search result:")
         # Print solution, if found
         self.printSolution(grid)
+
+    def dequeue(self, arr):
+        if len(arr) > 0:
+            return True, arr.pop(0)
+        return False
+    
+    def enqueue(self, arr, point):
+        arr.insert(len(arr), point)
+        return True
     
     # Print out solution, if found
     def printSolution(self, grid):
@@ -207,7 +206,7 @@ class Search:
 # BASIC TEST
 search = Search([("r1", "r2"), ("r1", "r3"), ("r2", "r4"), ("r3", "r4")])
 # ADVANCED TEST
-search = Search([("r1", "r2"), ("r1", "r3"), ("r2", "r4"), ("r3", "r4"),("r3", "r5"),("r5", "r4"),("r5", "r6")])
+#search = Search([("r1", "r2"), ("r1", "r3"), ("r2", "r4"), ("r3", "r4"),("r3", "r5"),("r5", "r4"),("r5", "r6")])
 # Print out the map
 search.printState()
 # Show the breadth first searching

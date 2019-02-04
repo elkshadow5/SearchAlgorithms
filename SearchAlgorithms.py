@@ -85,7 +85,7 @@ class Search:
 
         print("Depth first search result:")
         for point in grid:
-            print("\t"+str(point)+" color: "+point.color)  
+            print("\t"+point.let+" color: "+point.color)  
     
     def idfs(self):
         grid = copy.deepcopy(self.grid)

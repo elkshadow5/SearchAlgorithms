@@ -1,5 +1,8 @@
 import copy
 
+#Andrew Forste & David Jefts
+#CS455 Spring 2019
+#HW1, question #4
 
 class GridPoint:
     def __init__(self, let, color):

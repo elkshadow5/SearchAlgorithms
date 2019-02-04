@@ -9,14 +9,16 @@ class GridPoint:
     def addNeighbors(self, neighbor):
         self.neighbors.append(neighbor)
 
+    #Returns true if has same color as any of its neighbors
     def hasConflict(self):
         for neighbor in self.neighbors:
             if neighbor.color==self.color:
                 return True
         return False
     
+    #Returns the name of the node, plus its neighbor nodes
     def __repr__(self):
-        returnString = self.let+" --- ["
+        returnString = self.let+" --- [ "
         for neighbor in self.neighbors:
             returnString = returnString+neighbor.let+" "
         returnString+="]"
@@ -55,25 +57,35 @@ class Search:
         return 0
     
     def depth(self):
+        print("\nDepth first searching: ")
+        #Setup. Perform deep copy to preserve main grid
         grid = copy.deepcopy(self.grid)
         stack = []
         closed = []
         stack.append(grid[0])
+
+        #Start going through the stack        
         while len(stack)>0:
             point = stack.pop()
             closed.append(point)
+            print("\tNow working with node "+point.let+"...")
+            #Add neighbors to the stack, assuming they haven't been
+            #  visited or are already there
             for neighbor in point.neighbors:
                 if neighbor not in closed and neighbor not in stack:
                     stack.append(neighbor)
+            
+            #Go through the list of colors until get one so its different
+            #  than any of its neighbors' colors
             colorToTry = 0
             point.color = self.colors[colorToTry]
             while point.hasConflict():
-                colorToTry=colorToTry+1
+                colorToTry+=1
                 point.color = self.colors[colorToTry]
 
         print("Depth first search result:")
         for point in grid:
-            print(str(point)+" color: "+point.color)  
+            print("\t"+str(point)+" color: "+point.color)  
     
     def idfs(self):
         grid = copy.deepcopy(self.grid)
@@ -81,11 +93,9 @@ class Search:
 
     
     def printState(self):
-        print()
-        print("Map in:")
+        print("\nMap in:")
         for pt in self.grid:
             print(pt)
-        print()
 
 
 search = Search()

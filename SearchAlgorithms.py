@@ -28,15 +28,15 @@ class Search:
                     grdpt.addNeighbors(adj[0])
     
     # SEARCH ALGORITHMS #
-    def depth(self):
+    def breadth(self):
         # TODO: Depth-first Search algorithm
         return 0
     
-    def greedy(self):
+    def depth(self):
         # TODO: Greedy best-first search algorithm
         return 0
     
-    def astar(self):
+    def idfs(self):
         # TODO: A* search algorithm
         return 0
     

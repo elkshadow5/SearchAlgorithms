@@ -91,6 +91,7 @@ class Search:
         grid = copy.deepcopy(self.grid)
         return 0
 
+    #Check to see if every point has a color and there are no conflicts
     def reachedEndCondition(self, gridIn):
         for point in gridIn:
             if point.hasConflict() or point.color=="black":
